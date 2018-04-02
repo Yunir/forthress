@@ -23,3 +23,6 @@ dup 1 > if
   else drop 1 then
 else drop 0 then ;
 ( 2 prime . 11 prime . 191 prime . 201 prime . -- 1110)
+
+: primeallot prime 8 allot swap over ! ;
+( 5 primeallot c@ .n )
