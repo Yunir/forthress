@@ -30,11 +30,35 @@ else drop 0 then ;
 : dec 1 - ;
 : concat
 swap dup count >r over count r@
-+ inc heap-alloc dup .n
++ inc heap-alloc
 dup rot string-copy
-r> over >r + dup .n
+r> over >r +
 swap string-copy r>
 ;
+( m" Hello " m" world!" concat .S dup prints m" another string" over prints )
 
-( m" Hello " m" world!" concat .S dup prints
-m" another string" over prints )
+( m" Salimzyanov" string-hash 3 % .n )
+
+: collatz ( xn -- xn xn-1 ... x3 x2 x1 xn )
+dup >r
+repeat
+  dup 1 > if
+    dup 2 % if
+    dup 3 * inc
+    else dup 2 / then
+  else 1 then
+dup 1 = until
+r> ;
+(  )
+: .until ( xn xn-1 ... x3 x2 x1 xn -- - )
+  >r
+  repeat
+    dup .s
+    r@ =
+  until
+cr r> drop ;
+ ( 5 collatz .until )
+ ( -2 collatz .until )
+ ( check stack does not change )
+ ( 999 5 collatz .until .n )
+ ( 999 -2 collatz .until .n )
