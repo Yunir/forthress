@@ -26,3 +26,15 @@ else drop 0 then ;
 
 : primeallot prime 8 allot swap over ! ;
 ( 5 primeallot c@ .n )
+
+: dec 1 - ;
+: concat
+swap dup count >r over count r@
++ inc heap-alloc dup .n
+dup rot string-copy
+r> over >r + dup .n
+swap string-copy r>
+;
+
+( m" Hello " m" world!" concat .S dup prints
+m" another string" over prints )
