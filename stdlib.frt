@@ -122,7 +122,7 @@ then
 ;
 
 : cr 10 emit ;
-: QUOTE 34 emit ;
+: QUOTE 34 ;
 
 : _"
   compiling if
@@ -297,4 +297,6 @@ include managed-string.frt
 ." Forthress -- a tiny Forth from scratch > (c) Igor Zhirkov 2017-2018 " cr
 
 include fib.frt
+
+include native.frt
 
